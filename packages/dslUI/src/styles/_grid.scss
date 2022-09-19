@@ -1,0 +1,22 @@
+$oneColumnWidth: calc(100% / 12);
+$gap: 15px;
+
+.ui-row {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+
+  margin-top: $gap * -1;
+  margin-left: calc($gap / 2 * -1);
+  margin-right: calc($gap / 2 * -1);
+}
+
+@for $i from 1 to 13 {
+  .ui-col-#{$i} {
+    width: $i * $oneColumnWidth;
+    flex-shrink: 0;
+    padding-top: $gap;
+    padding-left: calc($gap / 2);
+    padding-right: calc($gap / 2);
+  }
+}

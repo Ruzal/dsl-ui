@@ -1,0 +1,32 @@
+$color-text-primary: #262626;
+$color-text-secondary: #606060;
+$color-text-disabled: #8C8C8C;
+$color-outline: #D9D9D9;
+
+$color-red: #dd4040;
+$color-yellow: #ffba00;
+$color-purple: #ad6eed;
+$color-blue: #689ffe;
+$color-green: #40bf60;
+
+$color-layout-900: #fff;
+$color-layout-700: #f7f8fa;
+
+$colorMap: (
+  "red": $color-red,
+  "yellow": $color-yellow,
+  "purple": $color-purple,
+  "blue": $color-blue,
+  "green": $color-green
+);
+
+// Header
+$header-background: #000;
+
+// Sidebar
+$sidebar-background: $color-layout-900;
+
+$sidebar-menu-item-color: $color-text-secondary;
+$sidebar-menu-item-hover-color: $color-text-primary;
+$sidebar-menu-item-active-background: $color-layout-700;
+$sidebar-menu-item-active-color: $color-text-primary;

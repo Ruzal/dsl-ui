@@ -1,0 +1,46 @@
+input, button, textarea, select {
+  outline: none;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+.ui-wrapper {
+  width: 100%;
+  padding: 20px;
+}
+
+@each $var in (10, 15, 20) {
+  .ui-ml-#{$var} {
+    margin-left: #{$var}px;
+  }
+  .ui-mt-#{$var} {
+    margin-top: #{$var}px;
+  }
+  .ui-mr-#{$var} {
+    margin-right: #{$var}px;
+  }
+  .ui-mb-#{$var} {
+    margin-bottom: #{$var}px;
+  }
+  .ui-m-#{$var} {
+    margin: #{$var}px;
+  }
+  .ui-p-#{$var} {
+    padding: #{$var}px;
+  }
+  .ui-pl-#{$var} {
+    padding-left: #{$var}px;
+  }
+  .ui-pt-#{$var} {
+    padding-top: #{$var}px;
+  }
+  .ui-pr-#{$var} {
+    padding-right: #{$var}px;
+  }
+  .ui-pb-#{$var} {
+    padding-bottom: #{$var}px;
+  }
+}
+
+@import "./grid";
