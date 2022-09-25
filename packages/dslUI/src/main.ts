@@ -1,6 +1,10 @@
 import "./styles/index.scss";
 
+// Button
 import UIButton from "./components/button/UIButton.vue";
+import UIButtonGroup from "./components/button/UIButtonGroup.vue";
+
+// Input
 import UIInput from "./components/input/UIInput.vue";
 // import UISelect from "./components/select/UISelect.vue";
 
@@ -25,6 +29,7 @@ import UIPre from "./components/pre/UIPre.vue";
 
 export {
   UIButton,
+  UIButtonGroup,
   UIInput,
   // UISelect,
   UIHeader,

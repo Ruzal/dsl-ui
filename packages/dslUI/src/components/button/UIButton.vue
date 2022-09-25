@@ -5,9 +5,9 @@
         <slot name="before"></slot>
       </div>
 
-      <div class="ui-button-name">
+      <span class="ui-button-value">
         <slot></slot>
-      </div>
+      </span>
 
       <div class="ui-button-after" v-if="$slots.after">
         <slot name="after"></slot>
@@ -92,6 +92,9 @@ const classes = computed(() => [
   align-items: center;
   justify-content: center;
 
+  height: 36px;
+  padding: 0 20px;
+
   border: 1px solid transparent;
   border-radius: 6px;
   transition: background-color 0.3s ease;
@@ -106,22 +109,19 @@ const classes = computed(() => [
   &-container {
     display: flex;
     align-items: center;
-
-    height: 36px;
-    padding: 0 20px;
   }
 
-  &-before,
-  &-after {
+  &-prepend,
+  &-append {
     flex-shrink: 0;
     display: flex;
   }
 
-  &-before {
+  &-prepend {
     margin-right: 5px;
   }
 
-  &-after {
+  &-append {
     margin-left: 5px;
   }
 
@@ -157,31 +157,26 @@ const classes = computed(() => [
 
   &.ui-size {
     &-1 {
+      height: 24px;
+      padding: 0 5px;
+
       .ui-button-container {
-        height: 24px;
-        padding: 0 5px;
         font-size: 12px;
       }
     }
 
     &-2 {
-      .ui-button-container {
-        height: 32px;
-      }
+      height: 32px;
     }
 
     &-3 {
-      .ui-button-container {
-        height: 40px;
-        padding: 0 20px;
-      }
+      height: 40px;
+      padding: 0 20px;
     }
 
     &-4 {
-      .ui-button-container {
-        height: 48px;
-        padding: 0 25px;
-      }
+      height: 48px;
+      padding: 0 25px;
     }
   }
 
@@ -195,6 +190,15 @@ const classes = computed(() => [
 
   &.ui-state-disabled {
     cursor: not-allowed;
+    color: $color-text-disabled !important;
+
+    &:not(.ui-outline) {
+      background-color: $color-outline !important;
+    }
+
+    &.ui-outline {
+      border-color: $color-outline !important;
+    }
   }
 }
 </style>

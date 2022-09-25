@@ -5,6 +5,12 @@ input, button, textarea, select {
   font: inherit;
 }
 
+[class*="ui-"] {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .ui-wrapper {
   width: 100%;
   padding: 20px;
