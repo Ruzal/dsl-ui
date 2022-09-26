@@ -1,4 +1,3 @@
-import ButtonsPage from "@/views/ButtonsPage.vue";
 import HomePage from "@/views/HomePage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -13,8 +12,13 @@ const router = createRouter({
     {
       path: "/buttons",
       name: "buttons",
-      component: ButtonsPage
-    }
+      component: () => import("../views/ButtonsPage.vue"),
+    },
+    {
+      path: "/inputs",
+      name: "inputs",
+      component: () => import("../views/InputsPage.vue"),
+    },
   ],
 });
 

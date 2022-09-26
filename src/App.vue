@@ -19,7 +19,12 @@
               :active="$route.name == 'buttons'"
               >Button</UISidebarMenuItem
             >
-            <UISidebarMenuItem :icon="mdiFormTextbox">Input</UISidebarMenuItem>
+            <UISidebarMenuItem
+              :icon="mdiFormTextbox"
+              @click.prevent="$router.push('inputs')"
+              :active="$route.name == 'inputs'"
+              >Input</UISidebarMenuItem
+            >
             <UISidebarMenuItem :icon="mdiFormSelect">Select</UISidebarMenuItem>
           </UISidebarMenu>
         </UISidebar>

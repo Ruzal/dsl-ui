@@ -1,64 +1,53 @@
 <template>
-  <div :class="className">
-
-    <div class="ui-input-container">
-      <div class="ui-input-before" v-if="$slots.before">
-        <slot name="before"></slot>
-      </div>
-      
-      <input type="text" 
-      @input="onInput"
-      v-bind="attrs"/>
-
-      <div class="ui-input-after" v-if="$slots.after">
-        <slot name="after"></slot>
-      </div>
-
-      <div class="ui-input-loading" v-if="loading">
-        <div class="ui-loading"></div>
-      </div>
+  <div class="ui-input" :class="classes">
+    <div class="ui-input-before" v-if="$slots.before">
+      <slot name="before"></slot>
     </div>
 
-    <div class="ui-input-message ui-input-message-error" v-if="error">
-      {{ error }}
+    <input type="text" @input="onInput" v-bind="attrs" :disabled="props.disabled" />
+
+    <div class="ui-input-after" v-if="$slots.after">
+      <slot name="after"></slot>
     </div>
 
+    <div class="ui-input-loading" v-if="loading">
+      <UILoading />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue';
+import { computed, useAttrs } from "vue";
+import UILoading from "../loading/UILoading.vue";
 
-interface IProps {
-  modelValue?: string,
-  color?: string,
-  size?: string,
-  loading?: boolean,
-  disabled?: boolean,
-  error?: string
-}
+type Props = {
+  modelValue?: string;
+  color?: "red" | "green" | "blue" | "yellow" | "purple";
+  size?: string; //TODO: Change size values: small, medium (default), large
+  loading?: boolean;
+  disabled?: boolean;
+};
 
-const props = withDefaults(defineProps<IProps>(), {
-  modelValue: ""
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: "",
 });
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits<{
+  (e: "update:modelValue", v: string): void; //eslint-disable-line
+}>();
 
-const className = computed(() => {
-  const list = ["ui-input"];
-  if (props.color) list.push("ui-color-" + props.color);
-  if (props.size) list.push("ui-size-" + props.size);
-  if (props.loading) list.push("ui-state-loading");
-  if (props.disabled) list.push("ui-state-disabled");
-  if (props.error) list.push("ui-state-error");
-  return list;
-});
+const classes = computed(() => [
+  props.color && "ui-color-" + props.color,
+  props.size && "ui-size-" + props.size,
+  props.loading && "ui-state-loading",
+  props.disabled && "ui-state-disabled",
+]);
 
 const attrs = computed(() => {
-  const tempAttrs = {...useAttrs()};
-  if (tempAttrs.class) delete tempAttrs.class;
-  if (tempAttrs.id) delete tempAttrs.id;
-  return tempAttrs;
+  const _ = { ...useAttrs() };
+  if (_.class) delete _.class;
+  if (_.id) delete _.id;
+  return _;
 });
 
 function onInput(event: Event) {
@@ -68,44 +57,53 @@ function onInput(event: Event) {
 </script>
 
 <style lang="scss">
-@import "@ui/styles/variables.scss";
+@import "@ui-style-vars";
 
 @mixin inputBorderColor($borderColor) {
-  .ui-input-container {
-    border-color: $borderColor;
+  border-color: $borderColor;
 
-    &:hover, &:focus-within {
-      border-color: darken($borderColor, 10);
-    }
+  &:hover {
+    border-color: darken($borderColor, 10);
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 3px rgba($borderColor, 0.3);
   }
 }
 
 .ui-input {
+  display: flex;
+  align-items: center;
 
-  &-container {
-    display: flex;
-    align-items: center;
+  height: 36px;
+  padding: 0 20px;
 
-    height: 40px;
-    padding: 0 10px;
+  background: #fff;
+  border: 1px solid $color-outline;
+  border-radius: 6px;
 
-    background: #fff;
-    border: 1px solid $color-outline;
-    border-radius: 6px;
+  transition: border-color 0.3s ease;
 
-    transition: border-color .3s ease;
+  cursor: text;
 
-    input {
-      flex-grow: 1;
-      height: 100%;
-    }
+  input {
+    flex-grow: 1;
+    height: 100%;
 
-    &:hover, &:focus-within {
-      border-color: darken($color-outline, 10);
-    }
+    cursor: inherit;
   }
 
-  &-before, &-after, &-loading {
+  &:hover {
+    border-color: darken($color-outline, 10);
+  }
+
+  &:focus-within {
+    box-shadow: 0 0 0 3px rgba($color-outline, 0.3);
+  }
+
+  &-before,
+  &-after,
+  &-loading {
     flex-shrink: 0;
     display: flex;
   }
@@ -116,20 +114,6 @@ function onInput(event: Event) {
 
   &-after {
     margin-left: 5px;
-  }
-
-  &-message {
-    margin-bottom: 5px;
-    font-size: 12px;
-    
-    &-error {
-      color: $color-red;
-    }
-  }
-
-  .ui-loading {
-    width: 18px;
-    height: 18px;
   }
 
   &.ui-color {
@@ -163,10 +147,12 @@ function onInput(event: Event) {
     }
   }
 
-  &.ui-state-error {
-    .ui-input-container {
-      border-color: $color-red;
-    }
+  &.ui-state-loading {
+    cursor: wait;
+  }
+
+  &.ui-state-disabled {
+    cursor: not-allowed;
   }
 }
 </style>

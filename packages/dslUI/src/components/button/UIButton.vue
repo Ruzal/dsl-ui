@@ -28,7 +28,7 @@ type IProps = {
   block?: boolean;
   color?: "red" | "green" | "blue" | "yellow" | "purple";
   outline?: boolean;
-  size?: string;
+  size?: string; //TODO: Change size values: small, medium (default), large
   loading?: boolean;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
